@@ -1,12 +1,12 @@
 #pragma once
 
-// Unsigned int types
+// Unsigned int types.
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 typedef unsigned long long u64;
 
-// Signed int types
+// Signed int types.
 typedef signed char i8;
 typedef signed short i16;
 typedef signed int i32;
@@ -20,14 +20,14 @@ typedef double f64;
 typedef int b32;
 typedef char b8;
 
-// Properly define static assertions
+// Properly define static assertions.
 #if defined(__clang__) || defined(__gcc__)
 #define STATIC_ASSERT _Static_assert
 #else
 #define STATIC_ASSERT static_assert
 #endif
 
-// Ensure all types are of the correct size
+// Ensure all types are of the correct size.
 STATIC_ASSERT(sizeof(u8) == 1, "Expected u8 to be 1 byte.");
 STATIC_ASSERT(sizeof(u16) == 2, "Expected u16 to be 2 bytes.");
 STATIC_ASSERT(sizeof(u32) == 4, "Expected u32 to be 4 bytes.");
@@ -38,14 +38,14 @@ STATIC_ASSERT(sizeof(i16) == 2, "Expected i16 to be 2 bytes.");
 STATIC_ASSERT(sizeof(i32) == 4, "Expected i32 to be 4 bytes.");
 STATIC_ASSERT(sizeof(i64) == 8, "Expected i64 to be 8 bytes.");
 
-STATIC_ASSERT(sizeof(f32) == 4, "Expected f32 to be 4 byte.");
+STATIC_ASSERT(sizeof(f32) == 4, "Expected f32 to be 4 bytes.");
 STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 
 #define TRUE 1
 #define FALSE 0
 
 // Platform detection
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) 
 #define KPLATFORM_WINDOWS 1
 #ifndef _WIN64
 #error "64-bit is required on Windows!"
@@ -63,20 +63,20 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 // Posix
 #define KPLATFORM_POSIX 1
 #elif __APPLE__
-// Apple Platforms
+// Apple platforms
 #define KPLATFORM_APPLE 1
 #include <TargetConditionals.h>
 #if TARGET_IPHONE_SIMULATOR
-// IOS SIMULATOR
+// iOS Simulator
 #define KPLATFORM_IOS 1
 #define KPLATFORM_IOS_SIMULATOR 1
 #elif TARGET_OS_IPHONE
 #define KPLATFORM_IOS 1
 // iOS device
-##elif TARGET_OS_MAC
+#elif TARGET_OS_MAC
 // Other kinds of Mac OS
 #else
-#error "Unknown Apple Platform"
+#error "Unknown Apple platform"
 #endif
 #else
 #error "Unknown platform!"
@@ -87,12 +87,12 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #ifdef _MSC_VER
 #define KAPI __declspec(dllexport)
 #else
-#define KAPI __atribute__((visibility("default")))
+#define KAPI __attribute__((visibility("default")))
 #endif
 #else
 // Imports
 #ifdef _MSC_VER
-#define KAPI --declspec(dllimport)
+#define KAPI __declspec(dllimport)
 #else
 #define KAPI
 #endif
