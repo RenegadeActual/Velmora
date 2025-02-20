@@ -59,7 +59,9 @@
         "windowsx.h": "c",
         "vulkan_platform.h": "c",
         "renderer_frontend.h": "c",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "iosfwd": "c",
+        "xlocbuf": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
