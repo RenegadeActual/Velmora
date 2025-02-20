@@ -1,4 +1,5 @@
 #include <core/logger.h>
+#include <core/asserts.h>
 
 int main(void) {
     VFATAL("A test message: %f", 3.14f);
@@ -7,5 +8,8 @@ int main(void) {
     VINFO("A test message: %f", 3.14f);
     VDEBUG("A test message: %f", 3.14f);
     VTRACE("A test message: %f", 3.14f);
+   
+    VASSERT(1 == 0);
+
     return 0;
 }
