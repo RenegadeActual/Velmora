@@ -7,8 +7,8 @@ typedef struct application_state {
     b8 is_running;
     b8 is_suspended;
     platform_state platform;
-    i16 width;
     i16 height;
+    i16 width;
     f64 last_time;
 } application_state;
 
@@ -41,8 +41,8 @@ b8 application_create(application_config* config) {
             config->name, 
             config->start_pos_x, 
             config->start_pos_y, 
-            config->start_height, 
-            config->start_width )) {
+            config->start_width, 
+            config->start_height )) {
         return FALSE;
     }
     initialized = TRUE;
@@ -52,9 +52,15 @@ b8 application_create(application_config* config) {
 }
 
 b8 application_run() {
-    while(TRUE) {
-        platform_pump_messages(&state);
+    while(app_state.is_running) {
+        if(!platform_pump_messages(&app_state.platform)) {
+            app_state.is_running = FALSE;
+        }
     }
 
-    platform_shutdown(&state);
+    app_state.is_running = FALSE;
+
+    platform_shutdown(&app_state.platform);
+
+    return TRUE;
 }

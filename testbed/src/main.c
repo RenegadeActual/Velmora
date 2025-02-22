@@ -2,16 +2,21 @@
 #include <core/asserts.h>
 
 // TODO: Test
-#include <platform/platform.h>
+#include <core/application.h>
 
 int main(void) {
-    platform_state state;
-    if(platform_startup(&state, "Velmora Engine Testbed", 100, 100, 1280, 720 )) {
-        while(TRUE) {
-            platform_pump_messages(&state);
-        }
-    }
-    platform_shutdown(&state);
+    
+    // Application Configuration.
+    application_config config;
+    config.start_pos_x = 100;
+    config.start_pos_y = 100;
+    config.start_width = 1280;
+    config.start_height = 720;
+    config.name = "Velmora Engine Testbed";
+
+    application_create(&config);
+
+    application_run();
 
     return 0;
 }
